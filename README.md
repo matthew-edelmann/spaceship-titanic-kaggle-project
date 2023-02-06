@@ -61,3 +61,37 @@ I wanted to look at the age distribution of those who were transported and those
 The most noticiable difference in these plots is that young people are more likely too be transported. Checking the averages, this is true by, on average, 2.4 years.
 
 ## Modeling and Analysis
+
+Before even starting the modelling, we needed a baseline. The baseline is that if you chose either all 1s or all 0s, how accurate the model would be. Our goal is to be higher than the baseline. Our baseline in this case was 50.36%. So we needed to do better than this.
+
+For this project, I decided to go for a logistic regression model using a train test split. This is because the result is either a 1 (transported) or a 0 (not transported). Choosing my variables, I simply went over my heat map and added more variables depending on how correlated they were with the transported column until the model didn't continue to improve. I also found that adding a 2 degree polynomial feature improved the model. The model I used took these perameters from the dataset:
+
+**'CryoSleep', 'RoomService', 'Spa', 'VRDeck', 'Age', 'FoodCourt'**
+
+With this, the model produced these scores for the training and testing split sets:
+
+Training R2: 0.7803794913201454
+Testing R2: 0.7790556900726392
+
+This is a decent model that isn't over or under fit and accounts for around 78% of the variance in the data. This was the models coefficients:
+
+array([[ 9.18393977e-09, -1.24950910e-06, -6.92130469e-07,
+        -7.97614095e-07,  1.62854565e-07,  9.30539856e-07,
+         9.18393977e-09,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00,  2.62113522e-07,  0.00000000e+00,
+         4.37939060e-08,  2.52364393e-07,  1.78104179e-07,
+        -4.09094225e-05, -4.59975390e-08, -6.25133463e-07,
+         5.17632809e-07, -1.90320989e-05, -1.39082179e-07,
+        -4.46156288e-07, -2.24725805e-05,  3.30706228e-08,
+         5.92694223e-06,  3.11228954e-05, -2.45876277e-08]])
+         
+I simply then had to apply this model to our testing set to get our predictions and submit them to Kaggle.
+
+## Conclusion
+
+In conclusion, I was able to make a simple model that accounted for around 78% of the varience in the data. This model was better than our baseline in calculating whether or not a passanger was transported. 
+
+With further analysis, perhaps we can find a more accuate way of filling in the null data to get better results. And also, perhaps using a more robust model would give better results.
+
+Overall, this project was a success since it created a fairly accurate model of how to determine whether or not a passenger was transported. 
+
